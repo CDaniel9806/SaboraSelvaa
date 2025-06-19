@@ -51,6 +51,9 @@ public class Producto {
     @OneToMany(mappedBy = "producto")
     private List<Imagen> imagenes;
 
+    @OneToMany(mappedBy = "producto")
+    private List<DetallePedido> detalles; // Relación con DetallePedido, asumiendo que un producto puede estar en varios detalles de pedido
+
    
     
 
