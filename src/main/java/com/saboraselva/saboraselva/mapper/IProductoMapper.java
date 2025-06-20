@@ -5,8 +5,14 @@ package com.saboraselva.saboraselva.mapper;
 // List<ProductoDTO> toDtoList(List<Producto> productos);
 // List<Producto> toEntityList(List<ProductoDTO> productoDtos);
 
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING) /* poder usar el @Autowired Haz que este mapper funcione como un componente de Spring  */
 public interface IProductoMapper {
+
   
+    
     
     
 }
