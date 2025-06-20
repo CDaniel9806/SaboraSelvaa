@@ -1,6 +1,9 @@
 package com.saboraselva.saboraselva.model;
 
+import java.util.Date;
 import java.util.List;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +13,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,7 +60,21 @@ public class Producto {
     @OneToMany(mappedBy = "producto")
     private List<DetallePedido> detalles; // Relación con DetallePedido, asumiendo que un producto puede estar en varios detalles de pedido
 
-   
+   /* Registro de Fechas enla base de Datos */
+
+   @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;  
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;   
+
+   @PrePersist
+    public void prePersisten(){
+        this.createdAt = new Date();
+        
+    }   
     
 
     /* id_categoria */
