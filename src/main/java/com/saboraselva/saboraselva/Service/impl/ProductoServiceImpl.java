@@ -42,7 +42,7 @@ public class ProductoServiceImpl extends CRUDimpl<Producto, Long>  implements IP
     if (original == null) {
         throw new ModelNotFoundException("No existe el id : " + id);
     }
-    String[] ignoreProperties = new String[]{"git remotecreatedAt", "updatedAt"};
+    String[] ignoreProperties = new String[]{"createdAt", "updatedAt"};
     BeanUtils.copyProperties(entidad, original, ignoreProperties);
     return super.update(original, id);
 }
