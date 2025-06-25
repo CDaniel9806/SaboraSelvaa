@@ -7,7 +7,6 @@ package com.saboraselva.saboraselva.mapper;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-
 import org.mapstruct.MappingConstants;
 
 import com.saboraselva.saboraselva.Dto.ProductoDto;
