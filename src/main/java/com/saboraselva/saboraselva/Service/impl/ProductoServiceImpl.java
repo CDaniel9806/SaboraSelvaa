@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.saboraselva.saboraselva.Dto.ProductoDto;
 import com.saboraselva.saboraselva.Repo.IGenericRepository;
 import com.saboraselva.saboraselva.Service.IProductoService;
 import com.saboraselva.saboraselva.exception.ModelNotFoundException;
@@ -41,7 +42,7 @@ public class ProductoServiceImpl extends CRUDimpl<Producto, Long>  implements IP
     if (original == null) {
         throw new ModelNotFoundException("No existe el id : " + id);
     }
-    String[] ignoreProperties = new String[]{"createdAt", "updatedAt"};
+    String[] ignoreProperties = new String[]{"git remotecreatedAt", "updatedAt"};
     BeanUtils.copyProperties(entidad, original, ignoreProperties);
     return super.update(original, id);
 }
@@ -50,4 +51,9 @@ public class ProductoServiceImpl extends CRUDimpl<Producto, Long>  implements IP
     return super.getAll();
 }
 
+    @Override
+    public Producto createCustom (ProductoDto dto) { // este método es para crear un Producto a partir de un ProductoDto
+        Producto producto = iProductoMapper.toEntity(dto); // Convertimos el DTO a una entidad Producto
+        return super.create(producto); // Llamamos al método create de la clase padre CRUDimpl
+    }
 }
