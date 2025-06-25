@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/productos") // Define la ruta base para este controlador
+@RequestMapping("/producto") // Define la ruta base para este controlador
 
 public class ProductoController {
 
@@ -36,4 +38,11 @@ private final IProductoMapper iProductoMapper; // Mapper para convertir entre Pr
             throw new RuntimeException(e.getMessage());
         }
     }
+    @PostMapping("/create")
+    @Operation(summary = "Crear un nuevo producto", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<ProductoDto> save(@RequestBody ProductoDto dto) {
+        var producto = service.createCustom(dto);
+        var responseDto = iProductoMapper.toDto(producto);
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+}
 }
