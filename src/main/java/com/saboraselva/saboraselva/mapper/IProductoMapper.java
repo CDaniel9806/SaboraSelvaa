@@ -5,6 +5,8 @@ package com.saboraselva.saboraselva.mapper;
 // List<ProductoDTO> toDtoList(List<Producto> productos);
 // List<Producto> toEntityList(List<ProductoDTO> productoDtos);
 
+import java.util.List;
+
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -22,4 +24,5 @@ public interface IProductoMapper {
     @InheritInverseConfiguration
     Producto toEntity(ProductoDto producto);
      
+    List<ProductoDto> toDtoList(List<Producto> productos);
 }
