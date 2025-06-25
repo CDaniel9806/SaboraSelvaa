@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/producto")
+@RequestMapping("/productos") // Define la ruta base para este controlador
 
 public class ProductoController {
 
