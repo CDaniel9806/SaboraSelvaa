@@ -26,66 +26,32 @@ import com.saboraselva.saboraselva.model.Producto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/producto") // Define la ruta base para este controlador
+@RequestMapping("/productos") // Define la ruta base para este controlador
 
 public class ProductoController {
 
 private final IProductoService service; // update y createCustom personalizado
 private final IProductoMapper iProductoMapper; // Mapper para convertir entre ProductoDto y Producto
 
-    @GetMapping("/{idProducto}")
-    @Operation(summary = "Obtener producto por id", security = @SecurityRequirement(name = "bearerAuth")) /* Para probar con http://localhost:8080/swagger-ui.html */
-    public ResponseEntity<ProductoDto> findById(@PathVariable("idProducto") Long idProducto) {
-        try {
-            var producto = service.readById(idProducto);
-            var dto = iProductoMapper.toDto(producto);
-            return new ResponseEntity<>(dto, HttpStatus.OK);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-    @PostMapping("/create")
+
+
+
+
+
+
+@PostMapping("/create")
     @Operation(summary = "Crear un nuevo producto", security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<ProductoDto> save(@RequestBody ProductoDto dto) {
         var producto = service.createCustom(dto);
         var responseDto = iProductoMapper.toDto(producto);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
 }
-    
-    @GetMapping("/all")
-    public ResponseEntity<List<ProductoDto>> findByFiltro(){
-        
-        List<Producto> lst = service.getAll();
-        List<ProductoDto> lstProductoDto = this.iProductoMapper.toDtoList(lst);
 
-        return new ResponseEntity<>(lstProductoDto, HttpStatus.OK);
-    }       
-      
-    @PutMapping("/{idProducto}")
-    public ResponseEntity<ProductoDto> update( @PathVariable("idProducto") Long idProducto, @RequestBody @Valid ProductoDto dto){
-    
-        
-        Producto objEntitySource = this.iProductoMapper.toEntity(dto);
 
-        Producto obj =  service.update(objEntitySource, idProducto);
-        
-        return new ResponseEntity<>(this.iProductoMapper.toDto(obj) , HttpStatus.OK);
-    }   
-
-     @DeleteMapping("/{idProducto}")
-    public ResponseEntity<ProductoDto> delete(@PathVariable("idProducto") Long idProducto){
-    
-        try {
-            service.deleteById(idProducto);
-            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
-            
-        } catch (DataAccessException e) {
-            throw new BadRequestException(e.getMessage());
-        }
-
-    }
 }
