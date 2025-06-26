@@ -32,7 +32,10 @@ public class ProductoDto {
     private Double precio;    
     
     @NotNull(message = "no puede ser nulo")
-   private Long idCategoria;
+    private Long idCategoria;
+
+    @NotNull(message = "no puede ser nulo")
+    private Long idUsuario;
 }
     
 

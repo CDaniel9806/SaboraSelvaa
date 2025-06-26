@@ -41,10 +41,6 @@ private final IProductoMapper iProductoMapper; // Mapper para convertir entre Pr
 
 
 
-
-
-
-
 @PostMapping("/create")
     @Operation(summary = "Crear un nuevo producto", security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<ProductoDto> save(@RequestBody ProductoDto dto) {
