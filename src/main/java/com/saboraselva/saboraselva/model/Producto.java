@@ -51,7 +51,7 @@ public class Producto {
     private Categoria categoria;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = true)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "producto")
