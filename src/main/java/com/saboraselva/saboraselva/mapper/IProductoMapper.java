@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import com.saboraselva.saboraselva.Dto.ProductoDto;
@@ -18,7 +19,7 @@ import com.saboraselva.saboraselva.model.Producto;
 
 public interface IProductoMapper {
 
-    
+    @Mapping(target = "idCategoria", source = "categoria.idCategoria") // Mapea el idCategoria del producto al idCategoria de la categoría asociada
     ProductoDto toDto(Producto producto);
         
     @InheritInverseConfiguration
