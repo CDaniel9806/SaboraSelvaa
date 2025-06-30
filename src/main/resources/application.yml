@@ -1,3 +1,14 @@
+server:
+  port: 8080
+
+application:
+  security:
+    jwt:
+      secret-key: TU_CLAVE_SECRETA_AQUI
+      expiration: 86400000 # 1 día en milisegundos
+      refresh-token:
+        expiration: 604800000 # 7 días en milisegundos
+
 spring:
   application:
     name: SaborASelva
@@ -15,12 +26,6 @@ spring:
         default_schema: data
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-server:
-  port: 8080
 
-# eureka:
-#   instance:
-#     instance-id: ${spring.application.name}:${random.value}
-#   client:
-#     service-url:
-#       defaultZone: http://localhost:8761/eureka
+
+
