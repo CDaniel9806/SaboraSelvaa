@@ -8,6 +8,6 @@ import com.saboraselva.saboraselva.model.Usuario;
 
 
 @Repository
-public interface IUsuarioRepository extends IGenericRepository<Usuario, Long> {
+public interface IUserRepository extends IGenericRepository<Usuario, Long> {
      Optional<Usuario> findByNombre(String nombre);
 }
